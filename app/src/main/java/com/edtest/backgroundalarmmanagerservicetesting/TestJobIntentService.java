@@ -25,8 +25,8 @@ public class TestJobIntentService extends JobIntentService {
     public static final String TAG = "BACKGROUND_ALARM_MANAGER_SERVICE_TESTING";
     public static final String TAG2 = "TEST_JOB_INTENT_SERVICE: ";
 
-    public static final String SERVICE_STATUS = "com.edtest.backgroundalarmmanagerservicetesting.STATUS";
-    public static final String BROADCAST_ACTION = "com.edtest.backgroundalarmmanagerservicetesting.BROADCAST";
+    public static final String BAMST_SERVICE_STATUS = "com.edtest.backgroundalarmmanagerservicetesting.STATUS";
+    public static final String BAMST_BROADCAST_ACTION = "com.edtest.backgroundalarmmanagerservicetesting.BROADCAST";
 
     static final int JOB_ID = 1000;
     static final int REQUEST_CODE = 1001;
@@ -72,9 +72,9 @@ public class TestJobIntentService extends JobIntentService {
 
         //broadcast status
         String status = "Last Update: " + ts;
-        Intent statusIntent = new Intent(BROADCAST_ACTION)
+        Intent statusIntent = new Intent(BAMST_BROADCAST_ACTION)
                 // Puts the status into the Intent
-                .putExtra(SERVICE_STATUS, status);
+                .putExtra(BAMST_SERVICE_STATUS, status);
         // Broadcasts the Intent to receivers in this app.
         sendBroadcast(statusIntent);
 

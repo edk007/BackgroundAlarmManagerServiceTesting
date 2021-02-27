@@ -14,8 +14,8 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = "BACKGROUND_ALARM_MANAGER_SERVICE_TESTING";
     public static final String TAG2 = "MAIN_ACTIVITY: ";
 
-    public static final String SERVICE_STATUS = "com.edtest.backgroundalarmmanagerservicetesting.STATUS";
-    public static final String BROADCAST_ACTION = "com.edtest.backgroundalarmmanagerservicetesting.BROADCAST";
+    public static final String BAMST_SERVICE_STATUS = "com.edtest.backgroundalarmmanagerservicetesting.STATUS";
+    public static final String BAMST_BROADCAST_ACTION = "com.edtest.backgroundalarmmanagerservicetesting.BROADCAST";
 
     TextView textView;
 
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         TestJobIntentService.enqueueWork(this);
 
         //start a receiver to listen for the updates
-        IntentFilter statusIntentFilter = new IntentFilter(BROADCAST_ACTION);
+        IntentFilter statusIntentFilter = new IntentFilter(BAMST_BROADCAST_ACTION);
         ServiceStateReceiver serviceStateReceiver = new ServiceStateReceiver();
         registerReceiver(serviceStateReceiver, statusIntentFilter);
 
@@ -74,9 +74,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
 
-            if (BROADCAST_ACTION.equals(intent.getAction())) {
+            if (BAMST_BROADCAST_ACTION.equals(intent.getAction())) {
                 //handle
-                textView.setText(intent.getStringExtra(SERVICE_STATUS));
+                textView.setText(intent.getStringExtra(BAMST_SERVICE_STATUS));
             }
 
         }
