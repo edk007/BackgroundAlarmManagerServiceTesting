@@ -89,24 +89,28 @@ public class TestJobIntentService extends JobIntentService {
 
     private void writeToFile(String data) {
         String TAG3 = "WRITE_FILE_OUTPUT: ";
-        //Log.w(TAG,TAG2 + TAG3);
         String fileName = "BACKGROUND_ALARM_MANAGER_SERVICE_TESTING_LOG.txt";
-        File externalFilesPath = com.edtest.backgroundalarmmanagerservicetesting.TestJobIntentService.this.getExternalFilesDir(null);
-        File downloadFilesPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-        //Log.w(TAG, TAG2 + TAG3 + "FILE_NAME: " + fileName);
-        //Log.w(TAG, TAG2 + TAG3 + "EXTERNAL_FILE_PATH: " + externalFilesPath.toString());
-        Log.w(TAG, TAG2 + TAG3 + "DOWNLOAD_FILE_PATH: " + downloadFilesPath.toString());
+        File file;
+        File saveFilePath;
 
-        //File file = new File(externalFilesPath, fileName);
-        File file = new File(downloadFilesPath, fileName);
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.R) {
+            saveFilePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+        } else  {
+            saveFilePath = com.edtest.backgroundalarmmanagerservicetesting.TestJobIntentService.this.getExternalFilesDir(null);
+        }
+        Log.w(TAG, TAG2 + TAG3 + "LOG_FILE_PATH: " + saveFilePath.toString());
+        file = new File(saveFilePath, fileName);
+
         try {
             FileOutputStream stream = new FileOutputStream(file, true);
             try {
                 stream.write(data.getBytes());
             } finally {
+                Log.w(TAG, TAG2 + TAG3 + "WRITE_SUCCESS");
                 stream.close();
             }
         } catch (IOException e) {
+            Log.w(TAG, TAG2 + TAG3 + "WRITE_FAIL");
             e.printStackTrace();
         }
     }
